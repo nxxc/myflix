@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import YouTube from 'react-youtube';
+import movieTrailer from 'movie-trailer';
 import axios from './axios.js';
 import './Row.scss';
 
@@ -6,6 +8,7 @@ const baseUrl = 'https://image.tmdb.org/t/p/original';
 
 function Row({ title, fetchUrl, isLargeRow }) {
     const [movies, setMovies] = useState([]);
+    const [trailerUrl, setTrailerUrl] = useState('');
     // A snippet of code which runs based on a specific condition/variable
     //밖의 변수를 useEffect안에서 사용할 경우 []에 넣어 줘야함
     useEffect(() => {
@@ -18,6 +21,28 @@ function Row({ title, fetchUrl, isLargeRow }) {
         fetchData();
     }, [fetchUrl]);
 
+    const opts = {
+        height: '390',
+        width: '100%',
+        playerVars: {
+            autoplay: 1,
+        },
+    };
+
+    const handleClick = async (movie) => {
+        if (trailerUrl) {
+            setTrailerUrl('');
+        } else {
+            movieTrailer(movie?.title || movie?.name || 'JOKER')
+                .then((url) => {
+                    const urlParams = new URL(url).searchParams.get('v');
+                    console.log(urlParams);
+                    setTrailerUrl(urlParams);
+                })
+                .catch((e) => console.log(e));
+        }
+    };
+
     return (
         <div className='row'>
             <h2>{title}</h2>
@@ -27,6 +52,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 {movies.map((movie) => (
                     <img
                         key={movie.id}
+                        onClick={() => handleClick(movie)}
                         className={`row__poster ${
                             isLargeRow && 'row__posterLarge'
                         }`}
@@ -37,6 +63,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                     />
                 ))}
             </div>
+            {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
         </div>
     );
 }

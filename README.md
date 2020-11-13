@@ -5,9 +5,8 @@
  
 
  ## Hoisting
-- [ ] Get All Movies
-- [ ] Build the Rows
-- [ ] Build the Banner 
-- [ ] the Nav bar
-- [ ] Add Trailer popups
-- [ ] 
+- [x] Get All Movies
+- [x] Build the Rows
+- [x] Build the Banner 
+- [x] the Nav bar
+- [x] Add Trailer popups
