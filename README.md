@@ -10,3 +10,4 @@
 - [ ] Build the Banner 
 - [ ] the Nav bar
 - [ ] Add Trailer popups
+- [ ] 
