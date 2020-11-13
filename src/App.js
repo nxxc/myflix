@@ -1,18 +1,18 @@
 import './App.scss';
 import Row from './Row.js';
 import requests from './requests.js';
+import Banner from './Banner.js';
 
 function App() {
     return (
         <div className='App'>
-            <h1>
-                Hey Clever Programmer ! Let's build netflix clone Front-end
-                today
-            </h1>
+            {/* Navbar */}
+            {/* Banner */}
+            <Banner />
             <Row
                 title='NETFLIX ORIGINALS'
                 fetchUrl={requests.fetchNetflixOriginals}
-                isLargeRow
+                isLargeRow={true}
             />
             <Row title='Trending Now' fetchUrl={requests.fetchTrending}></Row>
             <Row title='Top Rated' fetchUrl={requests.fetchTopRated}></Row>
